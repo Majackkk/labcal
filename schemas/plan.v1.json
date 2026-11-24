@@ -1,0 +1,225 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "Calibration plan revision",
+  "type": "object",
+  "required": [
+    "schema_version",
+    "lab_id",
+    "equipment_id",
+    "equipment_config_hash",
+    "title",
+    "origin",
+    "requirements",
+    "source_ids"
+  ],
+  "properties": {
+    "schema_version": {
+      "const": "1.0"
+    },
+    "lab_id": {
+      "type": "string",
+      "minLength": 1
+    },
+    "equipment_id": {
+      "type": "string",
+      "minLength": 1
+    },
+    "equipment_config_hash": {
+      "type": "string",
+      "pattern": "^[a-f0-9]{64}$"
+    },
+    "title": {
+      "type": "string",
+      "minLength": 1
+    },
+    "origin": {
+      "enum": [
+        "user_plan",
+        "evidence_draft",
+        "legacy_markdown"
+      ]
+    },
+    "source_ids": {
+      "type": "array",
+      "items": {
+        "type": "string",
+        "minLength": 1
+      },
+      "uniqueItems": true
+    },
+    "requirements": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "required": [
+          "id",
+          "parameter",
+          "unit",
+          "delivery_route",
+          "coverage_policy",
+          "points",
+          "report_fields",
+          "evidence"
+        ],
+        "properties": {
+          "id": {
+            "type": "string",
+            "minLength": 1
+          },
+          "parameter": {
+            "type": "string",
+            "minLength": 1
+          },
+          "measurand": {
+            "type": "string"
+          },
+          "unit": {
+            "type": "string"
+          },
+          "component": {
+            "type": "string"
+          },
+          "channel": {
+            "type": "string"
+          },
+          "mode": {
+            "type": "string"
+          },
+          "conditions": {
+            "type": "object"
+          },
+          "mandatory": {
+            "type": "boolean"
+          },
+          "delivery_route": {
+            "enum": [
+              "external_calibration",
+              "legal_verification",
+              "internal_calibration",
+              "functional_check",
+              "pre_use_check",
+              "unresolved"
+            ]
+          },
+          "certificate_group": {
+            "type": "string"
+          },
+          "coverage_policy": {
+            "enum": [
+              "explicit_points",
+              "range",
+              "representative_points",
+              "unresolved"
+            ]
+          },
+          "calibration_range": {
+            "type": [
+              "object",
+              "null"
+            ]
+          },
+          "points": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            },
+            "uniqueItems": true
+          },
+          "report_fields": {
+            "type": "array",
+            "items": {
+              "type": "string",
+              "minLength": 1
+            },
+            "uniqueItems": true
+          },
+          "relative_basis": {
+            "enum": [
+              "reading",
+              "reference_value",
+              "full_scale",
+              "not_applicable",
+              "unresolved"
+            ]
+          },
+          "limit": {
+            "type": [
+              "object",
+              "null"
+            ]
+          },
+          "uncertainty": {
+            "type": [
+              "object",
+              "null"
+            ]
+          },
+          "decision_rule": {
+            "type": [
+              "object",
+              "null"
+            ]
+          },
+          "evidence": {
+            "type": "array",
+            "items": {
+              "type": "object",
+              "required": [
+                "source_id",
+                "claim_kind"
+              ],
+              "properties": {
+                "source_id": {
+                  "type": "string",
+                  "minLength": 1
+                },
+                "claim_kind": {
+                  "enum": [
+                    "normative",
+                    "manufacturer",
+                    "lab_requirement",
+                    "legacy"
+                  ]
+                },
+                "page": {
+                  "type": [
+                    "integer",
+                    "null"
+                  ],
+                  "minimum": 1
+                },
+                "anchor": {
+                  "type": "string"
+                },
+                "fields": {
+                  "type": "array",
+                  "items": {
+                    "type": "string",
+                    "minLength": 1
+                  },
+                  "uniqueItems": true
+                }
+              },
+              "additionalProperties": false
+            }
+          },
+          "raw": {
+            "type": "object"
+          }
+        },
+        "additionalProperties": false
+      },
+      "minItems": 1
+    },
+    "open_items": {
+      "type": "array",
+      "items": {
+        "type": "object"
+      }
+    },
+    "notes": {
+      "type": "string"
+    }
+  },
+  "additionalProperties": false
+}

@@ -1,0 +1,221 @@
+{
+  "type": "object",
+  "required": [
+    "task_hash",
+    "author",
+    "checks"
+  ],
+  "properties": {
+    "task_hash": {
+      "type": "string",
+      "minLength": 1
+    },
+    "author": {
+      "type": "string",
+      "minLength": 1
+    },
+    "checks": {
+      "type": "array",
+      "minItems": 1,
+      "items": {
+        "type": "object",
+        "required": [
+          "extraction_id",
+          "group",
+          "item",
+          "state",
+          "reason",
+          "basis",
+          "suggestion",
+          "evidence"
+        ],
+        "properties": {
+          "extraction_id": {
+            "type": "string",
+            "minLength": 1
+          },
+          "group": {
+            "enum": [
+              "identity",
+              "numeric",
+              "technical",
+              "conclusion",
+              "filing"
+            ]
+          },
+          "item": {
+            "type": "string",
+            "minLength": 1
+          },
+          "state": {
+            "enum": [
+              "no_anomaly_detected",
+              "confirmed_error",
+              "candidate_concern",
+              "unable_to_check",
+              "not_applicable"
+            ]
+          },
+          "reason": {
+            "type": "string",
+            "minLength": 1
+          },
+          "basis": {
+            "type": "string",
+            "minLength": 1
+          },
+          "suggestion": {
+            "type": "string",
+            "minLength": 1
+          },
+          "evidence": {
+            "type": "array",
+            "items": {
+              "type": "object",
+              "required": [
+                "page",
+                "bbox",
+                "quote",
+                "origin"
+              ],
+              "properties": {
+                "page": {
+                  "type": "integer",
+                  "minimum": 1
+                },
+                "bbox": {
+                  "type": "array",
+                  "items": {
+                    "type": "number",
+                    "minimum": 0,
+                    "maximum": 1
+                  },
+                  "minItems": 4,
+                  "maxItems": 4
+                },
+                "quote": {
+                  "type": "string",
+                  "minLength": 1
+                },
+                "origin": {
+                  "enum": [
+                    "native_text",
+                    "visual_page_read"
+                  ]
+                },
+                "image_sha256": {
+                  "type": "string",
+                  "minLength": 1
+                },
+                "markup": {
+                  "type": "object",
+                  "required": [
+                    "action"
+                  ],
+                  "properties": {
+                    "action": {
+                      "enum": [
+                        "replace",
+                        "delete",
+                        "insert",
+                        "clarify",
+                        "flag"
+                      ]
+                    },
+                    "condition": {
+                      "type": "string",
+                      "minLength": 1
+                    },
+                    "dimension": {
+                      "enum": [
+                        "certificate_self",
+                        "instrument_requirement",
+                        "intended_use"
+                      ]
+                    },
+                    "topic": {
+                      "enum": [
+                        "general",
+                        "uncertainty"
+                      ]
+                    },
+                    "uncertainty_basis": {
+                      "type": "object",
+                      "required": [
+                        "references",
+                        "application",
+                        "role"
+                      ],
+                      "properties": {
+                        "role": {
+                          "enum": [
+                            "requirement",
+                            "guidance",
+                            "supplementary_check"
+                          ]
+                        },
+                        "application": {
+                          "type": "string",
+                          "minLength": 1
+                        },
+                        "references": {
+                          "type": "array",
+                          "minItems": 1,
+                          "items": {
+                            "type": "object",
+                            "required": [
+                              "document",
+                              "clause",
+                              "quote",
+                              "source",
+                              "checked_on",
+                              "status"
+                            ],
+                            "properties": {
+                              "document": {
+                                "type": "string",
+                                "minLength": 1
+                              },
+                              "clause": {
+                                "type": "string",
+                                "minLength": 1
+                              },
+                              "quote": {
+                                "type": "string",
+                                "minLength": 1
+                              },
+                              "source": {
+                                "type": "string",
+                                "minLength": 1
+                              },
+                              "checked_on": {
+                                "type": "string",
+                                "minLength": 1
+                              },
+                              "status": {
+                                "const": "valid"
+                              }
+                            },
+                            "additionalProperties": false
+                          }
+                        }
+                      },
+                      "additionalProperties": false
+                    }
+                  },
+                  "additionalProperties": false
+                }
+              },
+              "additionalProperties": false
+            }
+          },
+          "calculation": {
+            "type": "object"
+          }
+        },
+        "additionalProperties": false
+      }
+    }
+  },
+  "additionalProperties": false
+}

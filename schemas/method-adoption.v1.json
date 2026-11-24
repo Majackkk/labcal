@@ -1,0 +1,37 @@
+{
+  "type": "object",
+  "required": [
+    "source_id",
+    "standard_code",
+    "edition",
+    "user_statement",
+    "evidence_reference"
+  ],
+  "properties": {
+    "source_id": {
+      "type": "string",
+      "minLength": 1
+    },
+    "standard_code": {
+      "type": "string",
+      "minLength": 1
+    },
+    "edition": {
+      "type": "string",
+      "minLength": 1
+    },
+    "user_statement": {
+      "type": "string",
+      "minLength": 1
+    },
+    "evidence_reference": {
+      "type": "string",
+      "minLength": 1
+    },
+    "supersedes": {
+      "type": "string",
+      "minLength": 1
+    }
+  },
+  "additionalProperties": false
+}

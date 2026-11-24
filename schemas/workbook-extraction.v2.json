@@ -1,0 +1,360 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "type": "object",
+  "required": [
+    "schema_version",
+    "lab_id",
+    "source_id",
+    "source_hash",
+    "parser",
+    "sheets",
+    "candidates",
+    "mapping",
+    "technical_review"
+  ],
+  "properties": {
+    "schema_version": {
+      "const": "2.0"
+    },
+    "lab_id": {
+      "type": "string",
+      "minLength": 1
+    },
+    "source_id": {
+      "type": "string",
+      "minLength": 1
+    },
+    "source_hash": {
+      "type": "string",
+      "pattern": "^[a-f0-9]{64}$"
+    },
+    "parser": {
+      "type": "string",
+      "minLength": 1
+    },
+    "sheets": {
+      "type": "array",
+      "items": {
+        "type": "object"
+      }
+    },
+    "candidates": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "required": [
+          "id",
+          "sheet",
+          "row",
+          "group",
+          "parameter",
+          "values",
+          "anchor",
+          "formula_cells",
+          "state",
+          "fields",
+          "field_sources"
+        ],
+        "properties": {
+          "id": {
+            "type": "string",
+            "minLength": 1
+          },
+          "sheet": {
+            "type": "string",
+            "minLength": 1
+          },
+          "row": {
+            "type": "integer",
+            "minimum": 1
+          },
+          "group": {
+            "type": "string",
+            "minLength": 1
+          },
+          "parameter": {
+            "type": "string",
+            "minLength": 1
+          },
+          "values": {
+            "type": "object"
+          },
+          "anchor": {
+            "type": "string",
+            "minLength": 1
+          },
+          "formula_cells": {
+            "type": "array",
+            "items": {
+              "type": "string",
+              "minLength": 1
+            }
+          },
+          "state": {
+            "const": "candidate"
+          },
+          "fields": {
+            "type": "object",
+            "required": [
+              "equipment_name",
+              "manufacturer",
+              "model",
+              "equipment_number",
+              "parameter",
+              "mpe",
+              "uncertainty"
+            ],
+            "properties": {
+              "equipment_name": {
+                "type": [
+                  "string",
+                  "null"
+                ]
+              },
+              "manufacturer": {
+                "type": [
+                  "string",
+                  "null"
+                ]
+              },
+              "model": {
+                "type": [
+                  "string",
+                  "null"
+                ]
+              },
+              "equipment_number": {
+                "type": [
+                  "string",
+                  "null"
+                ]
+              },
+              "parameter": {
+                "type": [
+                  "string",
+                  "null"
+                ]
+              },
+              "mpe": {
+                "type": [
+                  "string",
+                  "null"
+                ]
+              },
+              "uncertainty": {
+                "type": [
+                  "string",
+                  "null"
+                ]
+              }
+            },
+            "additionalProperties": false
+          },
+          "field_sources": {
+            "type": "object",
+            "properties": {
+              "equipment_name": {
+                "type": "object",
+                "required": [
+                  "sheet",
+                  "cell",
+                  "origin"
+                ],
+                "properties": {
+                  "sheet": {
+                    "type": "string",
+                    "minLength": 1
+                  },
+                  "cell": {
+                    "type": "string",
+                    "minLength": 1
+                  },
+                  "origin": {
+                    "enum": [
+                      "column",
+                      "label",
+                      "section",
+                      "inline"
+                    ]
+                  }
+                },
+                "additionalProperties": false
+              },
+              "manufacturer": {
+                "type": "object",
+                "required": [
+                  "sheet",
+                  "cell",
+                  "origin"
+                ],
+                "properties": {
+                  "sheet": {
+                    "type": "string",
+                    "minLength": 1
+                  },
+                  "cell": {
+                    "type": "string",
+                    "minLength": 1
+                  },
+                  "origin": {
+                    "enum": [
+                      "column",
+                      "label",
+                      "section",
+                      "inline"
+                    ]
+                  }
+                },
+                "additionalProperties": false
+              },
+              "model": {
+                "type": "object",
+                "required": [
+                  "sheet",
+                  "cell",
+                  "origin"
+                ],
+                "properties": {
+                  "sheet": {
+                    "type": "string",
+                    "minLength": 1
+                  },
+                  "cell": {
+                    "type": "string",
+                    "minLength": 1
+                  },
+                  "origin": {
+                    "enum": [
+                      "column",
+                      "label",
+                      "section",
+                      "inline"
+                    ]
+                  }
+                },
+                "additionalProperties": false
+              },
+              "equipment_number": {
+                "type": "object",
+                "required": [
+                  "sheet",
+                  "cell",
+                  "origin"
+                ],
+                "properties": {
+                  "sheet": {
+                    "type": "string",
+                    "minLength": 1
+                  },
+                  "cell": {
+                    "type": "string",
+                    "minLength": 1
+                  },
+                  "origin": {
+                    "enum": [
+                      "column",
+                      "label",
+                      "section",
+                      "inline"
+                    ]
+                  }
+                },
+                "additionalProperties": false
+              },
+              "parameter": {
+                "type": "object",
+                "required": [
+                  "sheet",
+                  "cell",
+                  "origin"
+                ],
+                "properties": {
+                  "sheet": {
+                    "type": "string",
+                    "minLength": 1
+                  },
+                  "cell": {
+                    "type": "string",
+                    "minLength": 1
+                  },
+                  "origin": {
+                    "enum": [
+                      "column",
+                      "label",
+                      "section",
+                      "inline"
+                    ]
+                  }
+                },
+                "additionalProperties": false
+              },
+              "mpe": {
+                "type": "object",
+                "required": [
+                  "sheet",
+                  "cell",
+                  "origin"
+                ],
+                "properties": {
+                  "sheet": {
+                    "type": "string",
+                    "minLength": 1
+                  },
+                  "cell": {
+                    "type": "string",
+                    "minLength": 1
+                  },
+                  "origin": {
+                    "enum": [
+                      "column",
+                      "label",
+                      "section",
+                      "inline"
+                    ]
+                  }
+                },
+                "additionalProperties": false
+              },
+              "uncertainty": {
+                "type": "object",
+                "required": [
+                  "sheet",
+                  "cell",
+                  "origin"
+                ],
+                "properties": {
+                  "sheet": {
+                    "type": "string",
+                    "minLength": 1
+                  },
+                  "cell": {
+                    "type": "string",
+                    "minLength": 1
+                  },
+                  "origin": {
+                    "enum": [
+                      "column",
+                      "label",
+                      "section",
+                      "inline"
+                    ]
+                  }
+                },
+                "additionalProperties": false
+              }
+            },
+            "additionalProperties": false
+          }
+        },
+        "additionalProperties": false
+      }
+    },
+    "mapping": {
+      "type": "object"
+    },
+    "technical_review": {
+      "const": "pending"
+    }
+  },
+  "additionalProperties": false
+}

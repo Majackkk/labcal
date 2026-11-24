@@ -1,0 +1,75 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "type": "object",
+  "required": [
+    "lab_id",
+    "plan_id",
+    "revision",
+    "payload_hash",
+    "equipment_config_hash",
+    "confirmed_by",
+    "confirmed_at",
+    "evidence_kind",
+    "user_statement",
+    "confirmed_fields",
+    "decision"
+  ],
+  "properties": {
+    "lab_id": {
+      "type": "string",
+      "minLength": 1
+    },
+    "plan_id": {
+      "type": "string",
+      "minLength": 1
+    },
+    "revision": {
+      "type": "integer",
+      "minimum": 1
+    },
+    "decision": {
+      "const": "confirm"
+    },
+    "payload_hash": {
+      "type": "string",
+      "minLength": 1
+    },
+    "equipment_config_hash": {
+      "type": "string",
+      "minLength": 1
+    },
+    "confirmed_by": {
+      "type": "string",
+      "minLength": 1
+    },
+    "confirmed_at": {
+      "type": "string",
+      "minLength": 1
+    },
+    "evidence_kind": {
+      "enum": [
+        "direct_user_message",
+        "operator_command"
+      ]
+    },
+    "user_statement": {
+      "type": "string",
+      "minLength": 1
+    },
+    "evidence_reference": {
+      "type": "string"
+    },
+    "confirmed_fields": {
+      "type": "array",
+      "items": {
+        "enum": [
+          "equipment_configuration",
+          "plan_scope",
+          "requirements"
+        ]
+      },
+      "uniqueItems": true
+    }
+  },
+  "additionalProperties": false
+}

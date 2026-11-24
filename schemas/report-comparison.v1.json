@@ -1,0 +1,472 @@
+{
+  "type": "object",
+  "required": [
+    "schema_version",
+    "lab_id",
+    "campaign_id",
+    "extraction_id",
+    "extraction_hash",
+    "basis",
+    "review_id",
+    "rows",
+    "technical_approval"
+  ],
+  "properties": {
+    "schema_version": {
+      "const": "1.0"
+    },
+    "lab_id": {
+      "type": "string",
+      "minLength": 1
+    },
+    "campaign_id": {
+      "type": "string",
+      "minLength": 1
+    },
+    "extraction_id": {
+      "type": "string",
+      "minLength": 1
+    },
+    "extraction_hash": {
+      "type": "string",
+      "pattern": "^[a-f0-9]{64}$"
+    },
+    "review_id": {
+      "type": [
+        "string",
+        "null"
+      ]
+    },
+    "basis": {
+      "type": "object",
+      "required": [
+        "mode",
+        "id",
+        "hash",
+        "label"
+      ],
+      "properties": {
+        "mode": {
+          "enum": [
+            "confirmed_baseline",
+            "candidate_preview",
+            "unmatched"
+          ]
+        },
+        "id": {
+          "type": "string"
+        },
+        "hash": {
+          "type": "string"
+        },
+        "label": {
+          "type": "string",
+          "minLength": 1
+        }
+      },
+      "additionalProperties": false
+    },
+    "rows": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "required": [
+          "id",
+          "category",
+          "title",
+          "plan",
+          "certificate",
+          "status",
+          "signal",
+          "reason",
+          "plan_anchor"
+        ],
+        "properties": {
+          "id": {
+            "type": "string",
+            "minLength": 1
+          },
+          "category": {
+            "enum": [
+              "identity",
+              "parameters",
+              "assurance"
+            ]
+          },
+          "title": {
+            "type": "string",
+            "minLength": 1
+          },
+          "plan": {
+            "type": "object",
+            "required": [
+              "text",
+              "anchors"
+            ],
+            "properties": {
+              "text": {
+                "type": "string"
+              },
+              "anchors": {
+                "type": "array",
+                "items": {
+                  "type": "object",
+                  "required": [
+                    "extraction_id",
+                    "location"
+                  ],
+                  "properties": {
+                    "extraction_id": {
+                      "type": "string",
+                      "minLength": 1
+                    },
+                    "location": {
+                      "type": "object",
+                      "required": [
+                        "page",
+                        "bbox"
+                      ],
+                      "properties": {
+                        "page": {
+                          "type": "integer",
+                          "minimum": 1
+                        },
+                        "bbox": {
+                          "type": "array",
+                          "items": {
+                            "type": "number"
+                          },
+                          "minItems": 4,
+                          "maxItems": 4
+                        },
+                        "line_ids": {
+                          "type": "array",
+                          "items": {
+                            "type": "string",
+                            "minLength": 1
+                          }
+                        },
+                        "quote": {
+                          "type": "string"
+                        },
+                        "kind": {
+                          "enum": [
+                            "text",
+                            "visual",
+                            "section",
+                            "document"
+                          ]
+                        },
+                        "markup": {
+                          "type": "object",
+                          "required": [
+                            "action"
+                          ],
+                          "properties": {
+                            "action": {
+                              "enum": [
+                                "replace",
+                                "delete",
+                                "insert",
+                                "clarify",
+                                "flag"
+                              ]
+                            },
+                            "condition": {
+                              "type": "string",
+                              "minLength": 1
+                            },
+                            "dimension": {
+                              "enum": [
+                                "certificate_self",
+                                "instrument_requirement",
+                                "intended_use"
+                              ]
+                            },
+                            "topic": {
+                              "enum": [
+                                "general",
+                                "uncertainty"
+                              ]
+                            },
+                            "uncertainty_basis": {
+                              "type": "object",
+                              "required": [
+                                "references",
+                                "application",
+                                "role"
+                              ],
+                              "properties": {
+                                "role": {
+                                  "enum": [
+                                    "requirement",
+                                    "guidance",
+                                    "supplementary_check"
+                                  ]
+                                },
+                                "application": {
+                                  "type": "string",
+                                  "minLength": 1
+                                },
+                                "references": {
+                                  "type": "array",
+                                  "minItems": 1,
+                                  "items": {
+                                    "type": "object",
+                                    "required": [
+                                      "document",
+                                      "clause",
+                                      "quote",
+                                      "source",
+                                      "checked_on",
+                                      "status"
+                                    ],
+                                    "properties": {
+                                      "document": {
+                                        "type": "string",
+                                        "minLength": 1
+                                      },
+                                      "clause": {
+                                        "type": "string",
+                                        "minLength": 1
+                                      },
+                                      "quote": {
+                                        "type": "string",
+                                        "minLength": 1
+                                      },
+                                      "source": {
+                                        "type": "string",
+                                        "minLength": 1
+                                      },
+                                      "checked_on": {
+                                        "type": "string",
+                                        "minLength": 1
+                                      },
+                                      "status": {
+                                        "const": "valid"
+                                      }
+                                    },
+                                    "additionalProperties": false
+                                  }
+                                }
+                              },
+                              "additionalProperties": false
+                            }
+                          },
+                          "additionalProperties": false
+                        }
+                      },
+                      "additionalProperties": false
+                    }
+                  },
+                  "additionalProperties": false
+                }
+              }
+            },
+            "additionalProperties": false
+          },
+          "certificate": {
+            "type": "object",
+            "required": [
+              "text",
+              "anchors"
+            ],
+            "properties": {
+              "text": {
+                "type": "string"
+              },
+              "anchors": {
+                "type": "array",
+                "items": {
+                  "type": "object",
+                  "required": [
+                    "extraction_id",
+                    "location"
+                  ],
+                  "properties": {
+                    "extraction_id": {
+                      "type": "string",
+                      "minLength": 1
+                    },
+                    "location": {
+                      "type": "object",
+                      "required": [
+                        "page",
+                        "bbox"
+                      ],
+                      "properties": {
+                        "page": {
+                          "type": "integer",
+                          "minimum": 1
+                        },
+                        "bbox": {
+                          "type": "array",
+                          "items": {
+                            "type": "number"
+                          },
+                          "minItems": 4,
+                          "maxItems": 4
+                        },
+                        "line_ids": {
+                          "type": "array",
+                          "items": {
+                            "type": "string",
+                            "minLength": 1
+                          }
+                        },
+                        "quote": {
+                          "type": "string"
+                        },
+                        "kind": {
+                          "enum": [
+                            "text",
+                            "visual",
+                            "section",
+                            "document"
+                          ]
+                        },
+                        "markup": {
+                          "type": "object",
+                          "required": [
+                            "action"
+                          ],
+                          "properties": {
+                            "action": {
+                              "enum": [
+                                "replace",
+                                "delete",
+                                "insert",
+                                "clarify",
+                                "flag"
+                              ]
+                            },
+                            "condition": {
+                              "type": "string",
+                              "minLength": 1
+                            },
+                            "dimension": {
+                              "enum": [
+                                "certificate_self",
+                                "instrument_requirement",
+                                "intended_use"
+                              ]
+                            },
+                            "topic": {
+                              "enum": [
+                                "general",
+                                "uncertainty"
+                              ]
+                            },
+                            "uncertainty_basis": {
+                              "type": "object",
+                              "required": [
+                                "references",
+                                "application",
+                                "role"
+                              ],
+                              "properties": {
+                                "role": {
+                                  "enum": [
+                                    "requirement",
+                                    "guidance",
+                                    "supplementary_check"
+                                  ]
+                                },
+                                "application": {
+                                  "type": "string",
+                                  "minLength": 1
+                                },
+                                "references": {
+                                  "type": "array",
+                                  "minItems": 1,
+                                  "items": {
+                                    "type": "object",
+                                    "required": [
+                                      "document",
+                                      "clause",
+                                      "quote",
+                                      "source",
+                                      "checked_on",
+                                      "status"
+                                    ],
+                                    "properties": {
+                                      "document": {
+                                        "type": "string",
+                                        "minLength": 1
+                                      },
+                                      "clause": {
+                                        "type": "string",
+                                        "minLength": 1
+                                      },
+                                      "quote": {
+                                        "type": "string",
+                                        "minLength": 1
+                                      },
+                                      "source": {
+                                        "type": "string",
+                                        "minLength": 1
+                                      },
+                                      "checked_on": {
+                                        "type": "string",
+                                        "minLength": 1
+                                      },
+                                      "status": {
+                                        "const": "valid"
+                                      }
+                                    },
+                                    "additionalProperties": false
+                                  }
+                                }
+                              },
+                              "additionalProperties": false
+                            }
+                          },
+                          "additionalProperties": false
+                        }
+                      },
+                      "additionalProperties": false
+                    }
+                  },
+                  "additionalProperties": false
+                }
+              }
+            },
+            "additionalProperties": false
+          },
+          "status": {
+            "enum": [
+              "passed",
+              "failed",
+              "pending",
+              "not_applicable"
+            ]
+          },
+          "signal": {
+            "enum": [
+              "matched",
+              "possible",
+              "conflict",
+              "insufficient"
+            ]
+          },
+          "reason": {
+            "type": "string",
+            "minLength": 1
+          },
+          "plan_anchor": {
+            "type": "string"
+          }
+        },
+        "additionalProperties": false
+      }
+    },
+    "technical_approval": {
+      "const": false
+    },
+    "projection_hash": {
+      "type": "string",
+      "pattern": "^[a-f0-9]{64}$"
+    }
+  },
+  "additionalProperties": false
+}

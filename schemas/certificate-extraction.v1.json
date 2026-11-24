@@ -1,0 +1,64 @@
+{
+  "type": "object",
+  "required": [
+    "schema_version",
+    "source_id",
+    "source_hash",
+    "document_kind",
+    "pages",
+    "fields",
+    "parser_version"
+  ],
+  "properties": {
+    "schema_version": {
+      "const": "1.0"
+    },
+    "source_id": {
+      "type": "string",
+      "minLength": 1
+    },
+    "source_hash": {
+      "type": "string",
+      "minLength": 1
+    },
+    "document_kind": {
+      "enum": [
+        "calibration",
+        "verification",
+        "unknown"
+      ]
+    },
+    "pages": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "properties": {
+          "engine": {
+            "enum": [
+              "pdf_text",
+              "tesseract",
+              "paddleocr-vl-1.6",
+              "pdf_text+tesseract_header"
+            ]
+          }
+        }
+      },
+      "minItems": 1
+    },
+    "fields": {
+      "type": "object"
+    },
+    "parser_version": {
+      "type": "string",
+      "minLength": 1
+    },
+    "warnings": {
+      "type": "array"
+    },
+    "digital_signatures_present": {
+      "type": "boolean"
+    }
+  },
+  "additionalProperties": false,
+  "$schema": "https://json-schema.org/draft/2020-12/schema"
+}

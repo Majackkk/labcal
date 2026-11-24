@@ -1,0 +1,36 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "type": "object",
+  "required": [
+    "kind",
+    "entity_id",
+    "revision",
+    "entity_hash"
+  ],
+  "properties": {
+    "kind": {
+      "enum": [
+        "source",
+        "workbook",
+        "plan",
+        "baseline",
+        "extraction",
+        "review",
+        "intelligence"
+      ]
+    },
+    "entity_id": {
+      "type": "string",
+      "minLength": 1
+    },
+    "revision": {
+      "type": "integer",
+      "minimum": 0
+    },
+    "entity_hash": {
+      "type": "string",
+      "pattern": "^[a-f0-9]{64}$"
+    }
+  },
+  "additionalProperties": false
+}

@@ -1,0 +1,56 @@
+{
+  "type": "object",
+  "required": [
+    "issue_id",
+    "category",
+    "state",
+    "statement",
+    "evidence_reference"
+  ],
+  "properties": {
+    "issue_id": {
+      "type": "string",
+      "minLength": 1
+    },
+    "statement": {
+      "type": "string",
+      "minLength": 1
+    },
+    "evidence_reference": {
+      "type": "string",
+      "minLength": 1
+    },
+    "supersedes": {
+      "type": "string",
+      "minLength": 1
+    },
+    "resolution_task": {
+      "type": "string",
+      "minLength": 1
+    },
+    "category": {
+      "enum": [
+        "correction",
+        "clarification",
+        "supplementary_calibration",
+        "use_condition"
+      ]
+    },
+    "state": {
+      "enum": [
+        "open",
+        "response_received",
+        "addressed"
+      ]
+    },
+    "response_source_ids": {
+      "type": "array",
+      "uniqueItems": true,
+      "items": {
+        "type": "string",
+        "minLength": 1
+      }
+    }
+  },
+  "additionalProperties": false
+}

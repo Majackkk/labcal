@@ -1,0 +1,26 @@
+[build-system]
+requires = ["setuptools>=68"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "labcal"
+version = "0.12.0"
+description = "Laboratory calibration plans, evidence and acceptance baselines"
+requires-python = ">=3.11"
+dependencies = []
+
+[project.optional-dependencies]
+pdf = ["pypdf>=5,<7", "pdfplumber>=0.11,<1", "PyMuPDF>=1.24,<2"]
+
+[project.scripts]
+labcal = "labcal.cli:main"
+
+[tool.setuptools.packages.find]
+where = ["src"]
+
+[tool.setuptools.package-data]
+labcal = ["web/*.html", "web/*.css", "web/*.js"]
+
+[tool.setuptools.data-files]
+"share/labcal/templates" = ["templates/calibration-plan/document.html"]
+

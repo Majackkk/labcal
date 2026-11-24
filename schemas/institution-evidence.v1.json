@@ -1,0 +1,75 @@
+{
+  "type": "object",
+  "required": [
+    "source_id",
+    "source_hash",
+    "institution",
+    "scheme",
+    "valid_from",
+    "valid_until",
+    "parameters",
+    "reviewer",
+    "reviewed_at",
+    "anchor"
+  ],
+  "properties": {
+    "source_id": {
+      "type": "string",
+      "minLength": 1
+    },
+    "source_hash": {
+      "type": "string",
+      "minLength": 1
+    },
+    "institution": {
+      "type": "string",
+      "minLength": 1
+    },
+    "scheme": {
+      "enum": [
+        "cnas",
+        "legal_verification",
+        "nmi",
+        "other"
+      ]
+    },
+    "valid_from": {
+      "type": "string",
+      "minLength": 1
+    },
+    "valid_until": {
+      "type": "string",
+      "minLength": 1
+    },
+    "authority_url": {
+      "type": "string"
+    },
+    "scope_complete": {
+      "type": "boolean"
+    },
+    "anchor": {
+      "type": "string",
+      "minLength": 1
+    },
+    "parameters": {
+      "type": "array",
+      "items": {
+        "type": "object"
+      },
+      "minItems": 1
+    },
+    "reviewer": {
+      "type": "string",
+      "minLength": 1
+    },
+    "reviewed_at": {
+      "type": "string",
+      "minLength": 1
+    },
+    "note": {
+      "type": "string"
+    }
+  },
+  "additionalProperties": false,
+  "$schema": "https://json-schema.org/draft/2020-12/schema"
+}

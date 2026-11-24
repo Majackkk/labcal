@@ -1,0 +1,1275 @@
+{
+  "type": "object",
+  "required": [
+    "schema_version",
+    "engine",
+    "lab_id",
+    "campaign_id",
+    "review_id",
+    "extraction_id",
+    "fields",
+    "fields_hash",
+    "input_hash",
+    "report",
+    "association",
+    "diagnostics",
+    "point_matrix",
+    "comparison_report",
+    "preconditions",
+    "summary",
+    "technical_approval"
+  ],
+  "properties": {
+    "schema_version": {
+      "const": "1.0"
+    },
+    "engine": {
+      "type": "string",
+      "minLength": 1
+    },
+    "lab_id": {
+      "type": "string",
+      "minLength": 1
+    },
+    "campaign_id": {
+      "type": "string",
+      "minLength": 1
+    },
+    "review_id": {
+      "type": "string",
+      "minLength": 1
+    },
+    "extraction_id": {
+      "type": "string",
+      "minLength": 1
+    },
+    "fields": {
+      "type": "object"
+    },
+    "fields_hash": {
+      "type": "string",
+      "pattern": "^[a-f0-9]{64}$"
+    },
+    "input_hash": {
+      "type": "string",
+      "pattern": "^[a-f0-9]{64}$"
+    },
+    "report": {
+      "type": "object",
+      "required": [
+        "file_name",
+        "certificate_number",
+        "document_kind"
+      ],
+      "properties": {
+        "file_name": {
+          "type": "string",
+          "minLength": 1
+        },
+        "certificate_number": {
+          "type": "string"
+        },
+        "document_kind": {
+          "type": "string",
+          "minLength": 1
+        }
+      },
+      "additionalProperties": false
+    },
+    "association": {
+      "type": [
+        "object",
+        "null"
+      ]
+    },
+    "diagnostics": {
+      "type": "array",
+      "items": {
+        "type": "object"
+      }
+    },
+    "point_matrix": {
+      "type": "object",
+      "required": [
+        "schema_version",
+        "parser",
+        "lab_id",
+        "campaign_id",
+        "basis",
+        "snapshots",
+        "rows",
+        "observations",
+        "warnings",
+        "technical_approval"
+      ],
+      "properties": {
+        "schema_version": {
+          "const": "2.0"
+        },
+        "parser": {
+          "type": "string",
+          "minLength": 1
+        },
+        "lab_id": {
+          "type": "string",
+          "minLength": 1
+        },
+        "campaign_id": {
+          "type": "string",
+          "minLength": 1
+        },
+        "basis": {
+          "type": "object",
+          "required": [
+            "mode",
+            "id",
+            "hash",
+            "label"
+          ],
+          "properties": {
+            "mode": {
+              "enum": [
+                "confirmed_baseline",
+                "candidate_preview",
+                "unmatched"
+              ]
+            },
+            "id": {
+              "type": "string"
+            },
+            "hash": {
+              "type": "string"
+            },
+            "label": {
+              "type": "string",
+              "minLength": 1
+            }
+          },
+          "additionalProperties": false
+        },
+        "snapshots": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "required": [
+              "id",
+              "hash"
+            ],
+            "properties": {
+              "id": {
+                "type": "string"
+              },
+              "hash": {
+                "type": "string"
+              }
+            },
+            "additionalProperties": false
+          }
+        },
+        "rows": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "required": [
+              "id",
+              "plan",
+              "certificate",
+              "signal",
+              "reason",
+              "alerts",
+              "status",
+              "decision_state",
+              "decision_reason",
+              "decision_evidence"
+            ],
+            "properties": {
+              "id": {
+                "type": "string",
+                "minLength": 1
+              },
+              "plan": {
+                "type": [
+                  "object",
+                  "null"
+                ],
+                "required": [
+                  "id",
+                  "requirement_id",
+                  "parameter",
+                  "family",
+                  "component",
+                  "condition",
+                  "point",
+                  "unit",
+                  "mpe",
+                  "uncertainty",
+                  "source",
+                  "raw_conditions",
+                  "parse_state",
+                  "note",
+                  "delivery_route"
+                ],
+                "properties": {
+                  "id": {
+                    "type": "string"
+                  },
+                  "requirement_id": {
+                    "type": "string"
+                  },
+                  "parameter": {
+                    "type": "string"
+                  },
+                  "family": {
+                    "type": "string"
+                  },
+                  "component": {
+                    "type": "string"
+                  },
+                  "condition": {
+                    "type": "string"
+                  },
+                  "point": {
+                    "type": "string"
+                  },
+                  "unit": {
+                    "type": "string"
+                  },
+                  "mpe": {
+                    "type": "string"
+                  },
+                  "uncertainty": {
+                    "type": "string"
+                  },
+                  "source": {
+                    "type": "string"
+                  },
+                  "raw_conditions": {
+                    "type": "string"
+                  },
+                  "parse_state": {
+                    "type": "string"
+                  },
+                  "note": {
+                    "type": "string"
+                  },
+                  "delivery_route": {
+                    "type": "string"
+                  }
+                },
+                "additionalProperties": false
+              },
+              "certificate": {
+                "type": [
+                  "object",
+                  "null"
+                ],
+                "required": [
+                  "id",
+                  "parameter",
+                  "family",
+                  "point",
+                  "unit",
+                  "condition",
+                  "measured",
+                  "error",
+                  "repeatability",
+                  "mpe",
+                  "repeatability_mpe",
+                  "uncertainty",
+                  "uncertainty_scope",
+                  "anchor_precision",
+                  "state",
+                  "anchor"
+                ],
+                "properties": {
+                  "id": {
+                    "type": "string"
+                  },
+                  "parameter": {
+                    "type": "string"
+                  },
+                  "family": {
+                    "type": "string"
+                  },
+                  "point": {
+                    "type": "string"
+                  },
+                  "unit": {
+                    "type": "string"
+                  },
+                  "condition": {
+                    "type": "string"
+                  },
+                  "measured": {
+                    "type": "string"
+                  },
+                  "error": {
+                    "type": "string"
+                  },
+                  "repeatability": {
+                    "type": "string"
+                  },
+                  "mpe": {
+                    "type": "string"
+                  },
+                  "repeatability_mpe": {
+                    "type": "string"
+                  },
+                  "uncertainty": {
+                    "type": "string"
+                  },
+                  "uncertainty_scope": {
+                    "type": "string"
+                  },
+                  "anchor_precision": {
+                    "type": "string"
+                  },
+                  "state": {
+                    "type": "string"
+                  },
+                  "anchor": {
+                    "type": "object",
+                    "required": [
+                      "extraction_id",
+                      "location"
+                    ],
+                    "properties": {
+                      "extraction_id": {
+                        "type": "string",
+                        "minLength": 1
+                      },
+                      "location": {
+                        "type": "object",
+                        "required": [
+                          "page",
+                          "bbox"
+                        ],
+                        "properties": {
+                          "page": {
+                            "type": "integer",
+                            "minimum": 1
+                          },
+                          "bbox": {
+                            "type": "array",
+                            "items": {
+                              "type": "number"
+                            },
+                            "minItems": 4,
+                            "maxItems": 4
+                          },
+                          "line_ids": {
+                            "type": "array",
+                            "items": {
+                              "type": "string",
+                              "minLength": 1
+                            }
+                          },
+                          "quote": {
+                            "type": "string"
+                          },
+                          "kind": {
+                            "enum": [
+                              "text",
+                              "visual",
+                              "section",
+                              "document"
+                            ]
+                          },
+                          "markup": {
+                            "type": "object",
+                            "required": [
+                              "action"
+                            ],
+                            "properties": {
+                              "action": {
+                                "enum": [
+                                  "replace",
+                                  "delete",
+                                  "insert",
+                                  "clarify",
+                                  "flag"
+                                ]
+                              },
+                              "condition": {
+                                "type": "string",
+                                "minLength": 1
+                              },
+                              "dimension": {
+                                "enum": [
+                                  "certificate_self",
+                                  "instrument_requirement",
+                                  "intended_use"
+                                ]
+                              },
+                              "topic": {
+                                "enum": [
+                                  "general",
+                                  "uncertainty"
+                                ]
+                              },
+                              "uncertainty_basis": {
+                                "type": "object",
+                                "required": [
+                                  "references",
+                                  "application",
+                                  "role"
+                                ],
+                                "properties": {
+                                  "role": {
+                                    "enum": [
+                                      "requirement",
+                                      "guidance",
+                                      "supplementary_check"
+                                    ]
+                                  },
+                                  "application": {
+                                    "type": "string",
+                                    "minLength": 1
+                                  },
+                                  "references": {
+                                    "type": "array",
+                                    "minItems": 1,
+                                    "items": {
+                                      "type": "object",
+                                      "required": [
+                                        "document",
+                                        "clause",
+                                        "quote",
+                                        "source",
+                                        "checked_on",
+                                        "status"
+                                      ],
+                                      "properties": {
+                                        "document": {
+                                          "type": "string",
+                                          "minLength": 1
+                                        },
+                                        "clause": {
+                                          "type": "string",
+                                          "minLength": 1
+                                        },
+                                        "quote": {
+                                          "type": "string",
+                                          "minLength": 1
+                                        },
+                                        "source": {
+                                          "type": "string",
+                                          "minLength": 1
+                                        },
+                                        "checked_on": {
+                                          "type": "string",
+                                          "minLength": 1
+                                        },
+                                        "status": {
+                                          "const": "valid"
+                                        }
+                                      },
+                                      "additionalProperties": false
+                                    }
+                                  }
+                                },
+                                "additionalProperties": false
+                              }
+                            },
+                            "additionalProperties": false
+                          }
+                        },
+                        "additionalProperties": false
+                      }
+                    },
+                    "additionalProperties": false
+                  },
+                  "evidence_observation_id": {
+                    "type": "string",
+                    "minLength": 1
+                  }
+                },
+                "additionalProperties": false
+              },
+              "signal": {
+                "enum": [
+                  "paired",
+                  "condition_pending",
+                  "ambiguous",
+                  "plan_only",
+                  "report_only",
+                  "unresolved",
+                  "other_route",
+                  "uncompared"
+                ]
+              },
+              "reason": {
+                "type": "string",
+                "minLength": 1
+              },
+              "alerts": {
+                "type": "array",
+                "items": {
+                  "type": "string",
+                  "minLength": 1
+                }
+              },
+              "status": {
+                "enum": [
+                  "passed",
+                  "failed",
+                  "pending",
+                  "not_applicable"
+                ]
+              },
+              "decision_state": {
+                "enum": [
+                  "concluded",
+                  "not_started",
+                  "needs_review",
+                  "missing_input",
+                  "unsupported",
+                  "not_applicable"
+                ]
+              },
+              "decision_reason": {
+                "type": "string",
+                "minLength": 1
+              },
+              "decision_evidence": {
+                "type": "array",
+                "items": {
+                  "type": "object"
+                }
+              }
+            },
+            "additionalProperties": false
+          }
+        },
+        "observations": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "required": [
+              "id",
+              "parameter",
+              "family",
+              "point",
+              "unit",
+              "condition",
+              "measured",
+              "error",
+              "repeatability",
+              "mpe",
+              "repeatability_mpe",
+              "uncertainty",
+              "uncertainty_scope",
+              "anchor_precision",
+              "state",
+              "anchor"
+            ],
+            "properties": {
+              "id": {
+                "type": "string"
+              },
+              "parameter": {
+                "type": "string"
+              },
+              "family": {
+                "type": "string"
+              },
+              "point": {
+                "type": "string"
+              },
+              "unit": {
+                "type": "string"
+              },
+              "condition": {
+                "type": "string"
+              },
+              "measured": {
+                "type": "string"
+              },
+              "error": {
+                "type": "string"
+              },
+              "repeatability": {
+                "type": "string"
+              },
+              "mpe": {
+                "type": "string"
+              },
+              "repeatability_mpe": {
+                "type": "string"
+              },
+              "uncertainty": {
+                "type": "string"
+              },
+              "uncertainty_scope": {
+                "type": "string"
+              },
+              "anchor_precision": {
+                "type": "string"
+              },
+              "state": {
+                "type": "string"
+              },
+              "anchor": {
+                "type": "object",
+                "required": [
+                  "extraction_id",
+                  "location"
+                ],
+                "properties": {
+                  "extraction_id": {
+                    "type": "string",
+                    "minLength": 1
+                  },
+                  "location": {
+                    "type": "object",
+                    "required": [
+                      "page",
+                      "bbox"
+                    ],
+                    "properties": {
+                      "page": {
+                        "type": "integer",
+                        "minimum": 1
+                      },
+                      "bbox": {
+                        "type": "array",
+                        "items": {
+                          "type": "number"
+                        },
+                        "minItems": 4,
+                        "maxItems": 4
+                      },
+                      "line_ids": {
+                        "type": "array",
+                        "items": {
+                          "type": "string",
+                          "minLength": 1
+                        }
+                      },
+                      "quote": {
+                        "type": "string"
+                      },
+                      "kind": {
+                        "enum": [
+                          "text",
+                          "visual",
+                          "section",
+                          "document"
+                        ]
+                      },
+                      "markup": {
+                        "type": "object",
+                        "required": [
+                          "action"
+                        ],
+                        "properties": {
+                          "action": {
+                            "enum": [
+                              "replace",
+                              "delete",
+                              "insert",
+                              "clarify",
+                              "flag"
+                            ]
+                          },
+                          "condition": {
+                            "type": "string",
+                            "minLength": 1
+                          },
+                          "dimension": {
+                            "enum": [
+                              "certificate_self",
+                              "instrument_requirement",
+                              "intended_use"
+                            ]
+                          },
+                          "topic": {
+                            "enum": [
+                              "general",
+                              "uncertainty"
+                            ]
+                          },
+                          "uncertainty_basis": {
+                            "type": "object",
+                            "required": [
+                              "references",
+                              "application",
+                              "role"
+                            ],
+                            "properties": {
+                              "role": {
+                                "enum": [
+                                  "requirement",
+                                  "guidance",
+                                  "supplementary_check"
+                                ]
+                              },
+                              "application": {
+                                "type": "string",
+                                "minLength": 1
+                              },
+                              "references": {
+                                "type": "array",
+                                "minItems": 1,
+                                "items": {
+                                  "type": "object",
+                                  "required": [
+                                    "document",
+                                    "clause",
+                                    "quote",
+                                    "source",
+                                    "checked_on",
+                                    "status"
+                                  ],
+                                  "properties": {
+                                    "document": {
+                                      "type": "string",
+                                      "minLength": 1
+                                    },
+                                    "clause": {
+                                      "type": "string",
+                                      "minLength": 1
+                                    },
+                                    "quote": {
+                                      "type": "string",
+                                      "minLength": 1
+                                    },
+                                    "source": {
+                                      "type": "string",
+                                      "minLength": 1
+                                    },
+                                    "checked_on": {
+                                      "type": "string",
+                                      "minLength": 1
+                                    },
+                                    "status": {
+                                      "const": "valid"
+                                    }
+                                  },
+                                  "additionalProperties": false
+                                }
+                              }
+                            },
+                            "additionalProperties": false
+                          }
+                        },
+                        "additionalProperties": false
+                      }
+                    },
+                    "additionalProperties": false
+                  }
+                },
+                "additionalProperties": false
+              },
+              "evidence_observation_id": {
+                "type": "string",
+                "minLength": 1
+              }
+            },
+            "additionalProperties": false
+          }
+        },
+        "warnings": {
+          "type": "array",
+          "items": {
+            "type": "string",
+            "minLength": 1
+          }
+        },
+        "technical_approval": {
+          "const": false
+        },
+        "projection_hash": {
+          "type": "string",
+          "pattern": "^[a-f0-9]{64}$"
+        }
+      },
+      "additionalProperties": false
+    },
+    "comparison_report": {
+      "type": "object",
+      "required": [
+        "schema_version",
+        "lab_id",
+        "campaign_id",
+        "extraction_id",
+        "extraction_hash",
+        "basis",
+        "review_id",
+        "rows",
+        "technical_approval"
+      ],
+      "properties": {
+        "schema_version": {
+          "const": "1.0"
+        },
+        "lab_id": {
+          "type": "string",
+          "minLength": 1
+        },
+        "campaign_id": {
+          "type": "string",
+          "minLength": 1
+        },
+        "extraction_id": {
+          "type": "string",
+          "minLength": 1
+        },
+        "extraction_hash": {
+          "type": "string",
+          "pattern": "^[a-f0-9]{64}$"
+        },
+        "review_id": {
+          "type": [
+            "string",
+            "null"
+          ]
+        },
+        "basis": {
+          "type": "object",
+          "required": [
+            "mode",
+            "id",
+            "hash",
+            "label"
+          ],
+          "properties": {
+            "mode": {
+              "enum": [
+                "confirmed_baseline",
+                "candidate_preview",
+                "unmatched"
+              ]
+            },
+            "id": {
+              "type": "string"
+            },
+            "hash": {
+              "type": "string"
+            },
+            "label": {
+              "type": "string",
+              "minLength": 1
+            }
+          },
+          "additionalProperties": false
+        },
+        "rows": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "required": [
+              "id",
+              "category",
+              "title",
+              "plan",
+              "certificate",
+              "status",
+              "signal",
+              "reason",
+              "plan_anchor"
+            ],
+            "properties": {
+              "id": {
+                "type": "string",
+                "minLength": 1
+              },
+              "category": {
+                "enum": [
+                  "identity",
+                  "parameters",
+                  "assurance"
+                ]
+              },
+              "title": {
+                "type": "string",
+                "minLength": 1
+              },
+              "plan": {
+                "type": "object",
+                "required": [
+                  "text",
+                  "anchors"
+                ],
+                "properties": {
+                  "text": {
+                    "type": "string"
+                  },
+                  "anchors": {
+                    "type": "array",
+                    "items": {
+                      "type": "object",
+                      "required": [
+                        "extraction_id",
+                        "location"
+                      ],
+                      "properties": {
+                        "extraction_id": {
+                          "type": "string",
+                          "minLength": 1
+                        },
+                        "location": {
+                          "type": "object",
+                          "required": [
+                            "page",
+                            "bbox"
+                          ],
+                          "properties": {
+                            "page": {
+                              "type": "integer",
+                              "minimum": 1
+                            },
+                            "bbox": {
+                              "type": "array",
+                              "items": {
+                                "type": "number"
+                              },
+                              "minItems": 4,
+                              "maxItems": 4
+                            },
+                            "line_ids": {
+                              "type": "array",
+                              "items": {
+                                "type": "string",
+                                "minLength": 1
+                              }
+                            },
+                            "quote": {
+                              "type": "string"
+                            },
+                            "kind": {
+                              "enum": [
+                                "text",
+                                "visual",
+                                "section",
+                                "document"
+                              ]
+                            },
+                            "markup": {
+                              "type": "object",
+                              "required": [
+                                "action"
+                              ],
+                              "properties": {
+                                "action": {
+                                  "enum": [
+                                    "replace",
+                                    "delete",
+                                    "insert",
+                                    "clarify",
+                                    "flag"
+                                  ]
+                                },
+                                "condition": {
+                                  "type": "string",
+                                  "minLength": 1
+                                },
+                                "dimension": {
+                                  "enum": [
+                                    "certificate_self",
+                                    "instrument_requirement",
+                                    "intended_use"
+                                  ]
+                                },
+                                "topic": {
+                                  "enum": [
+                                    "general",
+                                    "uncertainty"
+                                  ]
+                                },
+                                "uncertainty_basis": {
+                                  "type": "object",
+                                  "required": [
+                                    "references",
+                                    "application",
+                                    "role"
+                                  ],
+                                  "properties": {
+                                    "role": {
+                                      "enum": [
+                                        "requirement",
+                                        "guidance",
+                                        "supplementary_check"
+                                      ]
+                                    },
+                                    "application": {
+                                      "type": "string",
+                                      "minLength": 1
+                                    },
+                                    "references": {
+                                      "type": "array",
+                                      "minItems": 1,
+                                      "items": {
+                                        "type": "object",
+                                        "required": [
+                                          "document",
+                                          "clause",
+                                          "quote",
+                                          "source",
+                                          "checked_on",
+                                          "status"
+                                        ],
+                                        "properties": {
+                                          "document": {
+                                            "type": "string",
+                                            "minLength": 1
+                                          },
+                                          "clause": {
+                                            "type": "string",
+                                            "minLength": 1
+                                          },
+                                          "quote": {
+                                            "type": "string",
+                                            "minLength": 1
+                                          },
+                                          "source": {
+                                            "type": "string",
+                                            "minLength": 1
+                                          },
+                                          "checked_on": {
+                                            "type": "string",
+                                            "minLength": 1
+                                          },
+                                          "status": {
+                                            "const": "valid"
+                                          }
+                                        },
+                                        "additionalProperties": false
+                                      }
+                                    }
+                                  },
+                                  "additionalProperties": false
+                                }
+                              },
+                              "additionalProperties": false
+                            }
+                          },
+                          "additionalProperties": false
+                        }
+                      },
+                      "additionalProperties": false
+                    }
+                  }
+                },
+                "additionalProperties": false
+              },
+              "certificate": {
+                "type": "object",
+                "required": [
+                  "text",
+                  "anchors"
+                ],
+                "properties": {
+                  "text": {
+                    "type": "string"
+                  },
+                  "anchors": {
+                    "type": "array",
+                    "items": {
+                      "type": "object",
+                      "required": [
+                        "extraction_id",
+                        "location"
+                      ],
+                      "properties": {
+                        "extraction_id": {
+                          "type": "string",
+                          "minLength": 1
+                        },
+                        "location": {
+                          "type": "object",
+                          "required": [
+                            "page",
+                            "bbox"
+                          ],
+                          "properties": {
+                            "page": {
+                              "type": "integer",
+                              "minimum": 1
+                            },
+                            "bbox": {
+                              "type": "array",
+                              "items": {
+                                "type": "number"
+                              },
+                              "minItems": 4,
+                              "maxItems": 4
+                            },
+                            "line_ids": {
+                              "type": "array",
+                              "items": {
+                                "type": "string",
+                                "minLength": 1
+                              }
+                            },
+                            "quote": {
+                              "type": "string"
+                            },
+                            "kind": {
+                              "enum": [
+                                "text",
+                                "visual",
+                                "section",
+                                "document"
+                              ]
+                            },
+                            "markup": {
+                              "type": "object",
+                              "required": [
+                                "action"
+                              ],
+                              "properties": {
+                                "action": {
+                                  "enum": [
+                                    "replace",
+                                    "delete",
+                                    "insert",
+                                    "clarify",
+                                    "flag"
+                                  ]
+                                },
+                                "condition": {
+                                  "type": "string",
+                                  "minLength": 1
+                                },
+                                "dimension": {
+                                  "enum": [
+                                    "certificate_self",
+                                    "instrument_requirement",
+                                    "intended_use"
+                                  ]
+                                },
+                                "topic": {
+                                  "enum": [
+                                    "general",
+                                    "uncertainty"
+                                  ]
+                                },
+                                "uncertainty_basis": {
+                                  "type": "object",
+                                  "required": [
+                                    "references",
+                                    "application",
+                                    "role"
+                                  ],
+                                  "properties": {
+                                    "role": {
+                                      "enum": [
+                                        "requirement",
+                                        "guidance",
+                                        "supplementary_check"
+                                      ]
+                                    },
+                                    "application": {
+                                      "type": "string",
+                                      "minLength": 1
+                                    },
+                                    "references": {
+                                      "type": "array",
+                                      "minItems": 1,
+                                      "items": {
+                                        "type": "object",
+                                        "required": [
+                                          "document",
+                                          "clause",
+                                          "quote",
+                                          "source",
+                                          "checked_on",
+                                          "status"
+                                        ],
+                                        "properties": {
+                                          "document": {
+                                            "type": "string",
+                                            "minLength": 1
+                                          },
+                                          "clause": {
+                                            "type": "string",
+                                            "minLength": 1
+                                          },
+                                          "quote": {
+                                            "type": "string",
+                                            "minLength": 1
+                                          },
+                                          "source": {
+                                            "type": "string",
+                                            "minLength": 1
+                                          },
+                                          "checked_on": {
+                                            "type": "string",
+                                            "minLength": 1
+                                          },
+                                          "status": {
+                                            "const": "valid"
+                                          }
+                                        },
+                                        "additionalProperties": false
+                                      }
+                                    }
+                                  },
+                                  "additionalProperties": false
+                                }
+                              },
+                              "additionalProperties": false
+                            }
+                          },
+                          "additionalProperties": false
+                        }
+                      },
+                      "additionalProperties": false
+                    }
+                  }
+                },
+                "additionalProperties": false
+              },
+              "status": {
+                "enum": [
+                  "passed",
+                  "failed",
+                  "pending",
+                  "not_applicable"
+                ]
+              },
+              "signal": {
+                "enum": [
+                  "matched",
+                  "possible",
+                  "conflict",
+                  "insufficient"
+                ]
+              },
+              "reason": {
+                "type": "string",
+                "minLength": 1
+              },
+              "plan_anchor": {
+                "type": "string"
+              }
+            },
+            "additionalProperties": false
+          }
+        },
+        "technical_approval": {
+          "const": false
+        },
+        "projection_hash": {
+          "type": "string",
+          "pattern": "^[a-f0-9]{64}$"
+        }
+      },
+      "additionalProperties": false
+    },
+    "preconditions": {
+      "type": "array",
+      "items": {
+        "type": "object"
+      }
+    },
+    "summary": {
+      "type": "object"
+    },
+    "technical_approval": {
+      "const": false
+    }
+  },
+  "additionalProperties": false
+}

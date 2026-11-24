@@ -1,0 +1,28 @@
+{
+  "type": "object",
+  "required": [
+    "expected_association_id",
+    "device_id",
+    "operator",
+    "statement"
+  ],
+  "properties": {
+    "expected_association_id": {
+      "type": "string",
+      "minLength": 1
+    },
+    "device_id": {
+      "type": "string",
+      "minLength": 1
+    },
+    "operator": {
+      "type": "string",
+      "minLength": 1
+    },
+    "statement": {
+      "type": "string",
+      "minLength": 1
+    }
+  },
+  "additionalProperties": false
+}

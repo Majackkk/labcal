@@ -1,0 +1,116 @@
+{
+  "type": "object",
+  "required": [
+    "equipment_key",
+    "equipment_name",
+    "method_id",
+    "purpose",
+    "use_range",
+    "conditions",
+    "state",
+    "user_statement",
+    "evidence_reference",
+    "requirement_ids"
+  ],
+  "properties": {
+    "equipment_key": {
+      "type": "string",
+      "minLength": 1
+    },
+    "equipment_name": {
+      "type": "string",
+      "minLength": 1
+    },
+    "equipment_id": {
+      "type": "string",
+      "minLength": 1
+    },
+    "method_id": {
+      "type": "string",
+      "minLength": 1
+    },
+    "adoption_id": {
+      "type": "string",
+      "minLength": 1
+    },
+    "purpose": {
+      "type": "string",
+      "minLength": 1
+    },
+    "use_range": {
+      "type": "string",
+      "minLength": 1
+    },
+    "conditions": {
+      "type": "object"
+    },
+    "requirement_ids": {
+      "type": "array",
+      "minItems": 1,
+      "uniqueItems": true,
+      "items": {
+        "type": "string",
+        "minLength": 1
+      }
+    },
+    "state": {
+      "enum": [
+        "candidate",
+        "user_adopted"
+      ]
+    },
+    "user_statement": {
+      "type": "string"
+    },
+    "evidence_reference": {
+      "type": "string"
+    },
+    "supersedes": {
+      "type": "string",
+      "minLength": 1
+    },
+    "measurement": {
+      "type": "object",
+      "required": [
+        "role",
+        "quantity"
+      ],
+      "properties": {
+        "role": {
+          "type": "string",
+          "minLength": 1
+        },
+        "quantity": {
+          "type": "string",
+          "minLength": 1
+        },
+        "component": {
+          "type": "string",
+          "minLength": 1
+        },
+        "channel": {
+          "type": "string",
+          "minLength": 1
+        },
+        "direction": {
+          "type": "string",
+          "minLength": 1
+        },
+        "range_text": {
+          "type": "string",
+          "minLength": 1
+        },
+        "related_equipment_keys": {
+          "type": "array",
+          "uniqueItems": true,
+          "items": {
+            "type": "string",
+            "minLength": 1
+          }
+        }
+      },
+      "additionalProperties": false
+    }
+  },
+  "additionalProperties": false
+}

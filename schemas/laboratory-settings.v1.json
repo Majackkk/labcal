@@ -1,0 +1,36 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "type": "object",
+  "required": [
+    "operator",
+    "user_statement",
+    "expected_hash"
+  ],
+  "properties": {
+    "operator": {
+      "type": "string",
+      "minLength": 1
+    },
+    "user_statement": {
+      "type": "string",
+      "minLength": 1
+    },
+    "expected_hash": {
+      "type": "string",
+      "pattern": "^[a-f0-9]{64}$"
+    },
+    "name": {
+      "type": "string",
+      "minLength": 1
+    },
+    "laboratory_type": {
+      "type": "string",
+      "minLength": 1
+    },
+    "profile": {
+      "type": "string",
+      "minLength": 1
+    }
+  },
+  "additionalProperties": false
+}

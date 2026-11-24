@@ -1,0 +1,146 @@
+{
+  "type": "object",
+  "required": [
+    "id",
+    "lab_id",
+    "campaign_id",
+    "equipment_label",
+    "extraction_id",
+    "extraction_hash",
+    "source_id",
+    "source_hash",
+    "template_id",
+    "template_hash",
+    "template_source_hash",
+    "created_at",
+    "state",
+    "technical_approval"
+  ],
+  "properties": {
+    "id": {
+      "type": "string",
+      "minLength": 1
+    },
+    "lab_id": {
+      "type": "string",
+      "minLength": 1
+    },
+    "campaign_id": {
+      "type": "string",
+      "minLength": 1
+    },
+    "equipment_label": {
+      "type": "string",
+      "minLength": 1
+    },
+    "extraction_id": {
+      "type": "string",
+      "minLength": 1
+    },
+    "extraction_hash": {
+      "type": "string",
+      "minLength": 1
+    },
+    "source_id": {
+      "type": "string",
+      "minLength": 1
+    },
+    "source_hash": {
+      "type": "string",
+      "minLength": 1
+    },
+    "template_id": {
+      "type": "string",
+      "minLength": 1
+    },
+    "template_hash": {
+      "type": "string",
+      "minLength": 1
+    },
+    "template_source_hash": {
+      "type": "string",
+      "minLength": 1
+    },
+    "created_at": {
+      "type": "string",
+      "minLength": 1
+    },
+    "state": {
+      "const": "awaiting_evidence_and_form_filling"
+    },
+    "technical_approval": {
+      "const": false
+    },
+    "equipment_key": {
+      "type": "string",
+      "minLength": 1
+    },
+    "context_hash": {
+      "type": "string",
+      "minLength": 1
+    },
+    "replaces_task": {
+      "type": "string",
+      "minLength": 1
+    },
+    "replacement_reason": {
+      "type": "string",
+      "minLength": 1
+    },
+    "coverage_scope": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "required": [
+          "source_id",
+          "source_hash",
+          "standard",
+          "relationship"
+        ],
+        "properties": {
+          "source_id": {
+            "type": "string",
+            "minLength": 1
+          },
+          "source_hash": {
+            "type": "string",
+            "minLength": 1
+          },
+          "standard": {
+            "type": "string",
+            "minLength": 1
+          },
+          "relationship": {
+            "type": "string",
+            "minLength": 1
+          }
+        },
+        "additionalProperties": false
+      }
+    },
+    "review_version": {
+      "enum": [
+        2
+      ]
+    },
+    "quality_version": {
+      "const": 1
+    },
+    "use_basis_version": {
+      "const": 1
+    },
+    "basis_role_version": {
+      "const": 1
+    },
+    "reasoning_version": {
+      "const": 1
+    },
+    "input_policy": {
+      "const": "originals_and_direct_user_evidence"
+    },
+    "uncertainty_review_version": {
+      "const": 1
+    }
+  },
+  "additionalProperties": false
+}

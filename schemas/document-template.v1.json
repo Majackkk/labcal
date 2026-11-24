@@ -1,0 +1,56 @@
+{
+  "type": "object",
+  "required": [
+    "id",
+    "lab_id",
+    "role",
+    "title",
+    "source_id",
+    "source_hash",
+    "archive_path",
+    "inventory",
+    "user_statement",
+    "technical_approval"
+  ],
+  "properties": {
+    "id": {
+      "type": "string",
+      "minLength": 1
+    },
+    "lab_id": {
+      "type": "string",
+      "minLength": 1
+    },
+    "role": {
+      "type": "string",
+      "minLength": 1
+    },
+    "title": {
+      "type": "string",
+      "minLength": 1
+    },
+    "source_id": {
+      "type": "string",
+      "minLength": 1
+    },
+    "source_hash": {
+      "type": "string",
+      "minLength": 1
+    },
+    "archive_path": {
+      "type": "string",
+      "minLength": 1
+    },
+    "user_statement": {
+      "type": "string",
+      "minLength": 1
+    },
+    "inventory": {
+      "type": "object"
+    },
+    "technical_approval": {
+      "const": false
+    }
+  },
+  "additionalProperties": false
+}

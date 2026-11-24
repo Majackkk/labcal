@@ -1,0 +1,59 @@
+{
+  "type": "object",
+  "required": [
+    "kind",
+    "key",
+    "equipment_key",
+    "scope",
+    "statement",
+    "state",
+    "evidence_reference"
+  ],
+  "properties": {
+    "kind": {
+      "enum": [
+        "decision_rule",
+        "communication_workbook"
+      ]
+    },
+    "key": {
+      "type": "string",
+      "minLength": 1
+    },
+    "equipment_key": {
+      "type": "string",
+      "minLength": 1
+    },
+    "scope": {
+      "type": "string",
+      "minLength": 1
+    },
+    "statement": {
+      "type": "string",
+      "minLength": 1
+    },
+    "evidence_reference": {
+      "type": "string",
+      "minLength": 1
+    },
+    "supersedes": {
+      "type": "string",
+      "minLength": 1
+    },
+    "state": {
+      "enum": [
+        "candidate",
+        "recorded"
+      ]
+    },
+    "source_id": {
+      "type": "string",
+      "minLength": 1
+    },
+    "page": {
+      "type": "integer",
+      "minimum": 1
+    }
+  },
+  "additionalProperties": false
+}
